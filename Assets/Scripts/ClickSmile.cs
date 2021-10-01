@@ -13,13 +13,23 @@ public class ClickSmile : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("スマイルください");
-        GameManager.Instance.w2 += 5;
-        /*
-        GameManager.Instance.EmotionPlus();
-        if (GameManager.Instance.w > 5)
+        if (GameManager.Instance.point > 0)
         {
-            GameManager.Instance.w -= 5;
+            GameManager.Instance.point -= 1;
+            GameManager.Instance.Point.fillAmount -= GameManager.Instance.wariai;
+            GameManager.Instance.Point2.fillAmount -= GameManager.Instance.wariai;
+            if (GameManager.Instance.w > 5)
+            {
+                GameManager.Instance.w -= 5;
+            }
+            else
+            {
+                GameManager.Instance.w2 += 5;
+            }
         }
-        */
+        else
+        {
+            return;
+        }
     }
 }

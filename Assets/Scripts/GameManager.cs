@@ -18,7 +18,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     List<int> deck = new List<int>() {};
     List<int> deck2 = new List<int>() {};
     public CardEntity cardEntity;
-    public float countDown = 5.0f;
+    public float countDown;
     public int turn = 0;
     public int decknum;
     //テスト用
@@ -33,8 +33,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public int t8;
     public int t9;
     public Image UIobj;
-    public float countTime = 5.0f;
-    public float countDownReset=15f;
+    public Image Point;
+    public Image Point2;
+    public float countTime;
+    public float countDownReset;
 
 
     //funamon変数
@@ -134,6 +136,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public float he;//目の変化量
     public float we =1f;
     public Image cardnum;
+
+    //ポイントゲージ関連
+    public float point;
+    public float wariai;
     
 
     //ゲームスタートに関する表示
@@ -180,6 +186,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     void Start()
     {
+        wariai = 1.0f / point;
         nowgame = false;
         StartButtun.SetActive(true);
         LoadImage.SetActive(true);
@@ -338,7 +345,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                     currentTime = 0f;
                     if (j == 0)
                     {
-                        if (w <= 100)
+                        if (w2>0)
+                        {
+                            w2 -= h;
+                        }
+                        else if (w <= 100)
                         {
                             w += h;
                             if (we >= 1)
@@ -682,6 +693,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         turn++;
         Debug.Log(turn);
         countDown = countDownReset;
+        Point.fillAmount = 1;
+        Point2.fillAmount = 1;
         Debug.Log("Playerのターン");
     }
 
@@ -697,6 +710,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         turn++;
         Debug.Log(turn);
         countDown = countDownReset;
+        Point.fillAmount = 1;
+        Point2.fillAmount = 1;
         Debug.Log("Enemyのターン");
     }
     void Shuffle()
